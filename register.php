@@ -1,12 +1,29 @@
-<?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST["username"];
-    $email = $_POST["email"];
-    $password = $_POST["password"];
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สมัครสมาชิก</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <?php
+    include 'navbar.php';
+    ?>
+    <div>
+        <h1>สมัครสมาชิก</h1>
+    </div>
+    <form action="register.php" method="post" class="form-container">
+        <label for="username" class="label">ชื่อผู้ใช้:</label>
+        <input type="text" id="username" name="username" required class="input-field"><br><br>
+        
+        <label for="email" class="label">อีเมล:</label>
+        <input type="email" id="email" name="email" required class="input-field"><br><br>
 
-    // Process the registration logic here
-    // For example, you can save the user data to a database
-
-    echo "Registration successful!";
-}
-?>
+        <label for="password" class="label">รหัสผ่าน:</label>
+        <input type="password" id="password" name="password" required class="input-field"><br><br>
+        
+        <input type="submit" value="สมัครสมาชิก" class="btn">
+    </form>     
+</body>
+</html>
