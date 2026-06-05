@@ -1,37 +1,80 @@
-p {
+p{
     font-size: 20px;
-    color: red;
-}
-h1 {
-    font-size: 30px;
     color: blue;
 }
+
+h1{
+    font-size: 30px;
+    color: red;
+}
+
 .btn {
-    background-color: green;
+    background-color: rgb(116, 207, 207);
     color: white;
     padding: 20px 20px;
     border: none;
     cursor: pointer;
+    transition: background-color 0.3s ease; /* เพิ่มบรรทัดนี้ */
 }
-.btn:hover {
-    background-color: rgb(0, 0, 0);
+
+.btn:hover{
+    background-color: #000000;
 }
-.input-field {
+
+.input-field{
     padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 20px;
+    width: 90%;
+    margin-bottom: 15px;
+
 }
 
-.form-container {
+.form-container{
     width: 300px;
-    margin: 0 auto;
+    margin: 80px auto 0 auto; /* จัดกึ่งกลางหน้าจอ */
     padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    border: 1px solid #858484;
+    border-radius: 15px;
+
 }
 
-.label {
+.label{
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
+}
+
+.navbar {
+    background-color: #333;
+    overflow: hidden;
+}
+
+.navbar a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.navbar a:hover {
+    background: #555;
+}
+
+.register-link {
+    display: block;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 400px;
+    margin: 50px auto;
+    
 }
