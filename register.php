@@ -10,10 +10,10 @@
     <?php
     include 'navbar.php';
     ?>
-    <div>
+    <div class="form-container">
         <h1>สมัครสมาชิก</h1>
-    </div>
-    <form action="register.php" method="post" class="form-container">
+
+    <form action="register.php" method="post" class="form">
         <label for="username" class="label">ชื่อผู้ใช้:</label>
         <input type="text" id="username" name="username" required class="input-field"><br><br>
         

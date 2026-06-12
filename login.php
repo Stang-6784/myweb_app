@@ -1,5 +1,5 @@
 <?php
-// session_start();
+session_start();
 
 require "config.php";
 
@@ -23,6 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($user && password_verify($password, $user["password"])) {
         $_SESSION["user_id"] = $user["id"];
         $_SESSION["name"] = $user["name"];
+        $_SESSION["email"] = $user["email"];
 
         if (isset($_POST["remember"])) {
             setcookie("user_email", $email, time() + (86400 * 7), "/");
@@ -57,7 +58,7 @@ include 'navbar.php';
         จำอีเมลไว้
     </label><br>
 
-    <button type="submit" class="btn">Login</button>
+    <button type="submit">Login</button>
 </form>
 
 <p><?= $message ?></p>
