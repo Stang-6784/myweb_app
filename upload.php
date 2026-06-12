@@ -17,27 +17,30 @@ if (isset($_POST["upload"])) {
     $file_size = $_FILES["image"]["size"];
     $file_ext  = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
 
-    $allowed = ["jpg", "jpeg", "png", "gif"];
+    $image_ext = ["jpg", "jpeg", "png", "gif"];
+    $other_ext = ["pdf", "doc", "docx", "xls", "xlsx", "txt", "zip"];
+    $allowed = array_merge($image_ext, $other_ext);
 
     if (!in_array($file_ext, $allowed)) {
-        $message = "อนุญาตเฉพาะ JPG, JPEG, PNG, GIF";
+        $message = "อนุญาตเฉพาะ JPG, JPEG, PNG, GIF, PDF, DOC, DOCX, XLS, XLSX, TXT, ZIP";
     } elseif ($file_size > 2 * 1024 * 1024) {
         $message = "ไฟล์ต้องไม่เกิน 2MB";
     } else {
-        $new_name = uniqid("IMG_", true) . "." . $file_ext;
+        $file_type = in_array($file_ext, $image_ext) ? "image" : "file";
+        $new_name = uniqid("UP_", true) . "." . $file_ext;
         $upload_path = "uploads/" . $new_name;
 
         if (move_uploaded_file($file_tmp, $upload_path)) {
 
             $stmt = mysqli_prepare(
                 $conn,
-                "INSERT INTO tbl_upload (user_id, image_name) VALUES (?, ?)"
+                "INSERT INTO tbl_upload (user_id, image_name, file_type) VALUES (?, ?, ?)"
             );
 
-            mysqli_stmt_bind_param($stmt, "is", $user_id, $new_name);
+            mysqli_stmt_bind_param($stmt, "iss", $user_id, $new_name, $file_type);
 
             if (mysqli_stmt_execute($stmt)) {
-                $message = "Upload สำเร็จ";
+                $message = "Upload complete";
             } else {
                 $message = "บันทึกฐานข้อมูลไม่สำเร็จ";
             }

@@ -6,6 +6,7 @@
         <a href="profile.php">โปรไฟล์</a>
         <a href="logout.php">ออกจากระบบ</a>
         <a href="upload.php">อัปโหลด</a>
+        <a href="file.php">อัปโหลดไฟล์</a>
     <?php }else { ?>
      <a href="login.php">เข้าสู่ระบบ</a> 
      <a href="register.php">สมัครสมาชิก</a>
