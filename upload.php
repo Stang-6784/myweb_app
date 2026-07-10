@@ -21,13 +21,18 @@ if (isset($_POST["upload"])) {
     $other_ext = ["pdf", "doc", "docx", "xls", "xlsx", "txt", "zip"];
     $allowed = array_merge($image_ext, $other_ext);
 
+    $image_info = in_array($file_ext, $image_ext) ? @getimagesize($file_tmp) : false;
+
     if (!in_array($file_ext, $allowed)) {
         $message = "อนุญาตเฉพาะ JPG, JPEG, PNG, GIF, PDF, DOC, DOCX, XLS, XLSX, TXT, ZIP";
     } elseif ($file_size > 2 * 1024 * 1024) {
         $message = "ไฟล์ต้องไม่เกิน 2MB";
+    } elseif ($image_info && ($image_info[0] > 1920 || $image_info[1] > 1080)) {
+        $message = "ขนาดรูปภาพต้องไม่เกิน 1920x1080 พิกเซล";
     } else {
         $file_type = in_array($file_ext, $image_ext) ? "image" : "file";
-        $new_name = uniqid("UP_", true) . "." . $file_ext;
+        $safe_name = preg_replace('/[^A-Za-z0-9._-]/', '_', basename($file_name));
+        $new_name = file_exists("uploads/" . $safe_name) ? uniqid() . "_" . $safe_name : $safe_name;
         $upload_path = "uploads/" . $new_name;
 
         if (move_uploaded_file($file_tmp, $upload_path)) {
@@ -85,8 +90,9 @@ $result = mysqli_stmt_get_result($stmt);
 echo "<div class='card-container'>";
 while ($row = mysqli_fetch_assoc($result)) {
     echo "<div class='card'>";
-    echo "<img src='uploads/" . htmlspecialchars($row["image_name"]) . "' style='width:100%;'><br>";
-    echo "ชื่อไฟล์: " . htmlspecialchars($row["image_name"]);
+    echo "<img src='uploads/" . htmlspecialchars($row["image_name"]) . "'><br>";
+    echo "ชื่อไฟล์: " . htmlspecialchars($row["image_name"]) . "<br>";
+    echo "<a href='delete_image.php?id=" . $row["id"] . "' onclick='return confirm(\"คุณแน่ใจหรือไม่ว่าต้องการลบไฟล์นี้?\")'>ลบ</a>";
     echo "</div>";
 }
 echo "</div>";

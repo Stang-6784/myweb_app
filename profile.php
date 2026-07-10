@@ -30,7 +30,19 @@ include 'navbar.php';
 
 <h2>Profile</h2>
 
+<?php if (!empty($user["img"])): ?>
+    <img src="avatars/<?= htmlspecialchars($user["img"]) ?>" class="profile-img">
+<?php endif; ?>
+
 <p>รหัสผู้ใช้: <?= $user["id"] ?></p>
 <p>ชื่อ: <?= $user["name"] ?></p>
 <p>อีเมล: <?= $user["email"] ?></p>
+<?php if (!empty($user["bio"])): ?>
+    <p>แนะนำตัว: <?= htmlspecialchars($user["bio"]) ?></p>
+<?php endif; ?>
+<?php if (!empty($user["address"])): ?>
+    <p>ที่อยู่: <?= htmlspecialchars($user["address"]) ?></p>
+<?php endif; ?>
 <!-- <p>วันที่สมัคร: <?= $user["created_at"] ?></p> -->
+
+<a href="profile_update.php" class="btn">แก้ไขโปรไฟล์</a>

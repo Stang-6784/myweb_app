@@ -24,7 +24,8 @@ if (isset($_POST["upload"])) {
     } elseif ($file_size > 30 * 1024 * 1024) {
         $message = "ไฟล์ต้องไม่เกิน 30MB";
     } else {
-        $new_name = uniqid("PDF_", true) . "." . $file_ext;
+        $safe_name = preg_replace('/[^A-Za-z0-9._-]/', '_', basename($file_name));
+        $new_name = file_exists("files/" . $safe_name) ? uniqid() . "_" . $safe_name : $safe_name;
         $upload_path = "files/" . $new_name;
 
         if (move_uploaded_file($file_tmp, $upload_path)) {
