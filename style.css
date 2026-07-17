@@ -96,3 +96,38 @@ img {
 .profile-img {
     max-width: 200px;
 }
+
+.section-title {
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.status-dot {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin: 10px auto;
+    border: 2px solid #999;
+}
+
+.status-dot.on {
+    background-color: #2ecc71;
+}
+
+.status-dot.off {
+    background-color: #ddd;
+}
+
+.small {
+    font-size: 14px;
+    color: #666;
+}
+
+.chart-box {
+    width: 90%;
+    max-width: 800px;
+    height: 350px;
+    margin: 20px auto 60px auto;
+}
